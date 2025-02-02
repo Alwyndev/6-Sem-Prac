@@ -79,7 +79,7 @@ public class InsertionMergeSort {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter the size of the array to be generated: ");
-        int arraySize = scanner.nextInt();
+        int len = scanner.nextInt();
 
         System.out.print("Enter the upper limit of the numbers to be generated: ");
         int upperLimit = scanner.nextInt();
@@ -93,13 +93,13 @@ public class InsertionMergeSort {
             while (iterations > 0) {
                 iterations--;
 
-                int[] array = new int[arraySize];
-                int[] copyArray = new int[arraySize];
-                File sampleFile = new File("SampleArray.txt");
+                int[] array = new int[len];
+                int[] copyArray = new int[len];
+                File sampleFile = new File("ArrayPrac2");
 
                 // Generate random numbers and write to file
                 try (FileWriter sampleWriter = new FileWriter(sampleFile)) {
-                    for (int i = 0; i < arraySize; i++) {
+                    for (int i = 0; i < len; i++) {
                         int randomNum = random.nextInt(upperLimit);
                         sampleWriter.write(randomNum + " ");
                     }
@@ -110,7 +110,7 @@ public class InsertionMergeSort {
 
                 // Read numbers from file into the array
                 try (Scanner fileScanner = new Scanner(sampleFile)) {
-                    for (int i = 0; i < arraySize && fileScanner.hasNextInt(); i++) {
+                    for (int i = 0; i < len && fileScanner.hasNextInt(); i++) {
                         array[i] = fileScanner.nextInt();
                     }
                 } catch (IOException e) {
@@ -127,13 +127,15 @@ public class InsertionMergeSort {
                 long startInsertion = System.nanoTime();
                 sorter.insertionSort(array);
                 long endInsertion = System.nanoTime();
-                insertionSortTimes.write((endInsertion - startInsertion) + " ns\n");
+                insertionSortTimes.write(len + ":" + (endInsertion - startInsertion) + " ns\n");
 
                 // Measure time for merge sort
                 long startMerge = System.nanoTime();
                 sorter.mergeSort(copyArray, 0, copyArray.length - 1);
                 long endMerge = System.nanoTime();
-                mergeSortTimes.write((endMerge - startMerge) + " ns\n");
+                mergeSortTimes.write(len + ":" +(endMerge - startMerge) + " ns\n");
+
+                len +=500;
             }
 
             System.out.println("Sorting times saved to insertionSortTimes.txt and mergeSortTimes.txt");

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Sort {
+public class BubbleSelectionSort {
 
     int[] bubbleSort(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
@@ -52,8 +52,8 @@ public class Sort {
         int no = input.nextInt();
 
         // Create file writers for the sorting times
-        try (FileWriter bubbleWriter = new FileWriter("bubSort.txt");
-             FileWriter selectionWriter = new FileWriter("selSort.txt")) {
+        try (FileWriter bubbleWriter = new FileWriter("bubbleSortTimes.txt");
+             FileWriter selectionWriter = new FileWriter("SelectionSortTimes.txt")) {
 
             while (no > 0) {
                 no--;
@@ -62,8 +62,8 @@ public class Sort {
                 int[] numsCopy = new int[len];
 
                 // Generate random numbers and write to file
-                File obj = new File("Sample.txt");
-                try (FileWriter writer = new FileWriter("Sample.txt")) {
+                File sampFile = new File("ArrayPrac1");
+                try (FileWriter writer = new FileWriter(sampFile)) {
                     for (int i = 0; i < len; i++) {
                         int number = rand.nextInt(lim);
                         writer.write(number + " ");
@@ -73,7 +73,7 @@ public class Sort {
                 }
 
                 // Read numbers from file
-                try (Scanner reader = new Scanner(obj)) {
+                try (Scanner reader = new Scanner(sampFile)) {
                     for (int i = 0; i < len; i++) {
                         if (reader.hasNextInt()) {
                             nums[i] = reader.nextInt();
@@ -86,24 +86,26 @@ public class Sort {
                 // Copy array for selection sort
                 System.arraycopy(nums, 0, numsCopy, 0, nums.length);
 
-                Sort sort = new Sort();
+                BubbleSelectionSort sort = new BubbleSelectionSort();
 
                 // Measure Bubble Sort time
                 long bubbleStartTime = System.nanoTime();
                 sort.bubbleSort(nums);
                 long bubbleEndTime = System.nanoTime();
                 long bubbleTime = bubbleEndTime - bubbleStartTime;
-                bubbleWriter.write(bubbleTime + " ns\n");
+                bubbleWriter.write(len + ":" + bubbleTime + " ns\n");
 
                 // Measure Selection Sort time
                 long selectionStartTime = System.nanoTime();
                 sort.selectionSort(numsCopy);
                 long selectionEndTime = System.nanoTime();
                 long selectionTime = selectionEndTime - selectionStartTime;
-                selectionWriter.write(selectionTime + " ns\n");
+                selectionWriter.write(len + ":" + selectionTime + " ns\n");
+
+                len +=500;
             }
 
-            System.out.println("Sorting times saved to bubSort.txt and selSort.txt");
+            System.out.println("Sorting times saved to bubbleSortTimes.txt and SelectionSortTimes.txt");
 
         } catch (IOException e) {
             System.out.println("Error writing sorting times to file: " + e.getMessage());
