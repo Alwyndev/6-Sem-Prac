@@ -88,7 +88,9 @@ public class InsertionMergeSort {
         int iterations = scanner.nextInt();
 
         try (FileWriter insertionSortTimes = new FileWriter("insertionSortTimes.txt");
-             FileWriter mergeSortTimes = new FileWriter("mergeSortTimes.txt")) {
+             FileWriter mergeSortTimes = new FileWriter("mergeSortTimes.txt");
+             FileWriter sortedInsertion = new FileWriter("SortedInsertion.txt");
+             FileWriter sortedMerge = new FileWriter("SortedMerge.txt")) {
 
             while (iterations > 0) {
                 iterations--;
@@ -128,13 +130,23 @@ public class InsertionMergeSort {
                 sorter.insertionSort(array);
                 long endInsertion = System.nanoTime();
                 insertionSortTimes.write(len + ":" + (endInsertion - startInsertion) + " ns\n");
+                sortedInsertion.write(len + ": ");
+                for (int i = 0; i < len; i++) {
+                    sortedInsertion.write(array[i] + " ");
+                }
+                sortedInsertion.write("\n\n");
 
                 // Measure time for merge sort
                 long startMerge = System.nanoTime();
                 sorter.mergeSort(copyArray, 0, copyArray.length - 1);
                 long endMerge = System.nanoTime();
+                sortedMerge.write(len + ": ");
                 mergeSortTimes.write(len + ":" +(endMerge - startMerge) + " ns\n");
-
+                for (int i = 0; i < len; i++) {
+                    sortedMerge.write(copyArray[i] + " ");
+                }
+                sortedMerge.write("\n\n");
+                
                 len +=500;
             }
 

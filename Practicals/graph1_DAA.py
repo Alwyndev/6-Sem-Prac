@@ -11,7 +11,7 @@ if __name__ == "__main__":
     for i in contents:
         i = i.split(":")
         runs.append(i[0])
-        bsort.append(int(i[1])//1000)
+        bsort.append(int(i[1])//100000)
 
 
     sel_file = open("selectionSortTimes.txt")
@@ -21,14 +21,14 @@ if __name__ == "__main__":
     ssort = []
     for i in contents:
         i=i.split(":")
-        ssort.append(int(i[1])//1000)
+        ssort.append(int(i[1])//100000)
 
 
 
     plt.plot(runs, bsort, label="Bubble Sort Swaps", marker ="o")
     plt.plot(runs, ssort, label="Selection Sort Swaps", marker='x')
     plt.xlabel("Run Number")
-    plt.ylabel("Time Taken (*1000) ns")
+    plt.ylabel("Time Taken (*100) microseconds")
     plt.title("Comparison of Bubble Sort and Selection Sort")
     plt.legend()
     plt.grid()

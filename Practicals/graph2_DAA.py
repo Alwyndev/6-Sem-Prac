@@ -12,10 +12,7 @@ if __name__ == "__main__":
         i=i.split(":")
         runs.append(int(i[0]))
         isort.append(int(i[1])//1000)
-
     
-
-
     mer_file = open("mergeSortTimes.txt")
     contents = mer_file.read()
     contents = contents.split(" ns\n")

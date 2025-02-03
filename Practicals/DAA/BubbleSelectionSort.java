@@ -53,7 +53,9 @@ public class BubbleSelectionSort {
 
         // Create file writers for the sorting times
         try (FileWriter bubbleWriter = new FileWriter("bubbleSortTimes.txt");
-             FileWriter selectionWriter = new FileWriter("SelectionSortTimes.txt")) {
+             FileWriter selectionWriter = new FileWriter("SelectionSortTimes.txt");
+             FileWriter sortedBubble = new FileWriter ("SortedBubble.txt");
+             FileWriter sortedSelection = new FileWriter ("SortedSelection.txt")) {
 
             while (no > 0) {
                 no--;
@@ -94,13 +96,24 @@ public class BubbleSelectionSort {
                 long bubbleEndTime = System.nanoTime();
                 long bubbleTime = bubbleEndTime - bubbleStartTime;
                 bubbleWriter.write(len + ":" + bubbleTime + " ns\n");
+                sortedBubble.write(len + ": ");
+                for (int i = 0; i < len; i++) {
+                    sortedBubble.write(nums[i] + " ");
+                }
+                sortedBubble.write("\n\n");
+
 
                 // Measure Selection Sort time
                 long selectionStartTime = System.nanoTime();
                 sort.selectionSort(numsCopy);
                 long selectionEndTime = System.nanoTime();
                 long selectionTime = selectionEndTime - selectionStartTime;
+                sortedSelection.write(len + ": ");
                 selectionWriter.write(len + ":" + selectionTime + " ns\n");
+                for (int i = 0; i < len; i++) {
+                    sortedSelection.write(numsCopy[i] + " ");
+                }
+                
 
                 len +=500;
             }
