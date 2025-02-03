@@ -89,84 +89,86 @@ def validateIpBlock(ip):
 
 def classify(ip):
     # subnet_mask = ''
-    temp = ip.split(".")
-    try:
-        if isValidIp(ip):
+    if isValidIp(ip):
+        temp = ip.split(".")
+        try:
+            if isValidIp(ip):
 
-            if temp[0] <= "127":
-                print("class A")
-                print(f"Network ID: {temp[0]}")
-                print(f"Host ID: {temp[1]}.{temp[2]}.{temp[3]}")
-                print(f"Network Address: {temp[0]}.0.0.0")
-                print(f"Host Address: 0.{temp[1]}.{temp[2]}.{temp[3]}")
-                print(f"Default Subnet Mask: 255.0.0.0")
-                
-            elif temp[0] <= "191":
-                print("class B")
-                print(f"Network ID: {temp[0]}.{temp[1]}.0.0")
-                print(f"Host ID: {temp[2]}.{temp[3]}")
-                print(f"Network Address: {temp[0]}.{temp[1]}.0.0")
-                print(f"Host Address: " + "0.0." + temp[2] + "." + temp[3])
-                print(f"Default Subnet Mask: 255.255.0.0")
-            elif temp[0] <= "223":
-                print("class C")
-                print(f"Network ID: {temp[0]}.{temp[1]}.{temp[2]}")
-                print(f"Host ID: {temp[3]}")
-                print(f"Network Address: {temp[0]}.{temp[1]}.{temp[2]}.0")
-                print(f"Host Address: 0.0.0.{temp[3]}")
-                print(f"Default Subnet Mask: 255.255.255.0")
+                if temp[0] <= "127":
+                    print("class A")
+                    print(f"Network ID: {temp[0]}")
+                    print(f"Host ID: {temp[1]}.{temp[2]}.{temp[3]}")
+                    print(f"Network Address: {temp[0]}.0.0.0")
+                    print(f"Host Address: 0.{temp[1]}.{temp[2]}.{temp[3]}")
+                    print(f"Default Subnet Mask: 255.0.0.0")
+                    
+                elif temp[0] <= "191":
+                    print("class B")
+                    print(f"Network ID: {temp[0]}.{temp[1]}.0.0")
+                    print(f"Host ID: {temp[2]}.{temp[3]}")
+                    print(f"Network Address: {temp[0]}.{temp[1]}.0.0")
+                    print(f"Host Address: " + "0.0." + temp[2] + "." + temp[3])
+                    print(f"Default Subnet Mask: 255.255.0.0")
+                elif temp[0] <= "223":
+                    print("class C")
+                    print(f"Network ID: {temp[0]}.{temp[1]}.{temp[2]}")
+                    print(f"Host ID: {temp[3]}")
+                    print(f"Network Address: {temp[0]}.{temp[1]}.{temp[2]}.0")
+                    print(f"Host Address: 0.0.0.{temp[3]}")
+                    print(f"Default Subnet Mask: 255.255.255.0")
 
-            elif temp[0] <= "239":
-                print("class D")
-                print(f"Network ID: {temp[0]}.{temp[1]}.{temp[2]}")
-                print(f"Host ID: {temp[3]}")
-            else:
-                print("class E")
-                print(f"Network ID: N/A")
-                print(f"Host ID: N/A")
-    except Exception as e:
-        print("Invalid IP Address",e)
+                elif temp[0] <= "239":
+                    print("class D")
+                    print(f"Network ID: {temp[0]}.{temp[1]}.{temp[2]}")
+                    print(f"Host ID: {temp[3]}")
+                else:
+                    print("class E")
+                    print(f"Network ID: N/A")
+                    print(f"Host ID: N/A")
+        except Exception as e:
+            print("Invalid IP Address",e)
         
 # Classificatin on Binary
 
 def classify_ip_bin(ip):
-    try:
-        ip = ip.split(".")
-        octect = []
+    if isValidIp(ip):
+        try:
+            ip = ip.split(".")
+            octect = []
 
-        for i in ip:
-            cell = format(int(i),'08b')
-            octect.append(cell)
-        
-        ip_bin = ".".join(octect)
-        print(f"IP address in Binary Notation  : {ip_bin}")
-        if octect[0].startswith('0'):
-            print("Class A")
-            print(f"Network ID: {octect[0]}")
-            print(f"Host ID: {octect[1]}.{octect[2]}.{octect[3]}")
-            print(f"Network Address: {octect[0]}.0.0.0")
-            print(f"Host Address: 0.{octect[1]}.{octect[2]}.{octect[3]}")
+            for i in ip:
+                cell = format(int(i),'08b')
+                octect.append(cell)
             
-        elif octect[0].startswith('10'):
-            print("Class B")
-            print(f"Network ID: {octect[0]}.{octect[1]}")
-            print(f"Host ID: {octect[2]}.{octect[3]}")
-            print(f"Network Address: {octect[0]}.{octect[1]}.0.0")
-            print(f"Host Address: 0.0.{octect[2]}.{octect[3]}")
-        elif octect[0].startswith('110'):
-            print("Class C")
-            print(f"Network ID: {octect[0]}.{octect[1]}.{octect[2]}")
-            print(f"Host ID: {octect[3]}")
-            print(f"Network Address: {octect[0]}.{octect[1]}.{octect[2]}.0")
-            print(f"Host Address: 0.0.0.{octect[3]}")
-        elif octect[0].startswith('1110'):
-            print("Class D")
-        elif octect[0].startswith('1111'):
-            print("Class E")
-        else:
-            print("Invalid IP Address")
-    except Exception as e:
-        print("Invalid IP Address:", e)
+            ip_bin = ".".join(octect)
+            print(f"IP address in Binary Notation  : {ip_bin}")
+            if octect[0].startswith('0'):
+                print("Class A")
+                print(f"Network ID: {octect[0]}")
+                print(f"Host ID: {octect[1]}.{octect[2]}.{octect[3]}")
+                print(f"Network Address: {octect[0]}.0.0.0")
+                print(f"Host Address: 0.{octect[1]}.{octect[2]}.{octect[3]}")
+                
+            elif octect[0].startswith('10'):
+                print("Class B")
+                print(f"Network ID: {octect[0]}.{octect[1]}")
+                print(f"Host ID: {octect[2]}.{octect[3]}")
+                print(f"Network Address: {octect[0]}.{octect[1]}.0.0")
+                print(f"Host Address: 0.0.{octect[2]}.{octect[3]}")
+            elif octect[0].startswith('110'):
+                print("Class C")
+                print(f"Network ID: {octect[0]}.{octect[1]}.{octect[2]}")
+                print(f"Host ID: {octect[3]}")
+                print(f"Network Address: {octect[0]}.{octect[1]}.{octect[2]}.0")
+                print(f"Host Address: 0.0.0.{octect[3]}")
+            elif octect[0].startswith('1110'):
+                print("Class D")
+            elif octect[0].startswith('1111'):
+                print("Class E")
+            else:
+                print("Invalid IP Address")
+        except Exception as e:
+            print("Invalid IP Address:", e)
 
 
 

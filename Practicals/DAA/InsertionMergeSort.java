@@ -139,7 +139,7 @@ public class InsertionMergeSort {
                 // Measure time for merge sort
                 long startMerge = System.nanoTime();
                 sorter.mergeSort(copyArray, 0, copyArray.length - 1);
-                long endMerge = System.nanoTime();
+                long endMerge = System.nanoTime(); 
                 sortedMerge.write(len + ": ");
                 mergeSortTimes.write(len + ":" +(endMerge - startMerge) + " ns\n");
                 for (int i = 0; i < len; i++) {
