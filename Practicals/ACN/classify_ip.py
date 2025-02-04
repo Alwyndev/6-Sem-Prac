@@ -49,8 +49,11 @@ def hasValidSeparator(ip):
 
 def validateIpBlock(ip):
     try:
-        # Split the input into the IP and prefix length
         temp = ip.split("/")
+        temp_ip = ip[0]
+        if len(temp) != 2:
+            raise ValueError("Invalid input format. Expected format: IP/PrefixLength")
+        
         temp_ip, n = temp[0], int(temp[1])
         temp_ip_bin = ""
 
@@ -62,6 +65,9 @@ def validateIpBlock(ip):
             temp_ip = temp_ip.split(".")
             for i in temp_ip:
                 temp_ip_bin += format(int(i), '08b')
+            
+            subnet = temp_ip_bin
+
 
             # Calculate the first and last address
             network_bin = temp_ip_bin[:n] + ('0' * (32 - n))  # Network address
@@ -74,17 +80,20 @@ def validateIpBlock(ip):
             print(f"First Address (Network Address): {first_address}")
             print(f"Last Address (Broadcast Address): {last_address}")
 
+            subnet = subnet[:n] + ('0' * (32 - n))
+            subnet = subnet[n:] + ('1' * (n))
+            subnet = subnet[::-1]
+            print(f"Subnet Mask: {int(subnet[:8],2)}.{int(subnet[8:16],2)}.{int(subnet[16:24],2)}.{int(subnet[24:],2)}")
+
             # Number of usable hosts
             usable_hosts = (2 ** (32 - n)) - 2 if n < 32 else 0
             print(f"Usable Hosts: {usable_hosts}")
         else:
             print("Invalid IP address or prefix length.")
+    except ValueError as ve:
+        print(f"ValueError: {ve}")
     except Exception as e:
         print(f"Error: {e}")
-
-    except Exception as e:
-        print(e)
-    # return True
 
 
 def classify(ip):
