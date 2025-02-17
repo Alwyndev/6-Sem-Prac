@@ -11,7 +11,7 @@ if __name__ == "__main__":
     for i in contents:
         i=i.split(":")
         runs.append(int(i[0]))
-        isort.append(int(i[1])//1000)
+        isort.append(int(i[1])//100000)
     
     mer_file = open("mergeSortTimes.txt")
     contents = mer_file.read()
@@ -20,13 +20,13 @@ if __name__ == "__main__":
     msort = []
     for i in contents:
         i=i.split(":")
-        msort.append(int(i[1])//1000)
+        msort.append(int(i[1])//100000)
 
 
     plt.plot(runs, isort, label="Insertion Sort Swaps", marker ="o")
     plt.plot(runs, msort, label="Merge Sort Swaps", marker='x')
     plt.xlabel("Run Number")
-    plt.ylabel("Time Taken (*1000) ns")
+    plt.ylabel("Time Taken (*100)ms")
     plt.title("Comparison of Merge Sort and Insertion Sort")
     plt.legend()
     plt.grid()
