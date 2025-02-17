@@ -17,6 +17,7 @@ def run_half_duplex_server():
                     break
                 received = data.decode('utf-8')
                 print(f"[Half-Duplex Server] Received: {received}")
+                print("[Half-Duplex Server] responding...")
                 # Respond to the client
                 response = f"Server received: {received}"
                 conn.sendall(response.encode('utf-8'))

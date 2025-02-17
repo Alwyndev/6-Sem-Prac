@@ -11,7 +11,7 @@ def run_simplex_server():
         conn, addr = s.accept()
         with conn:
             print(f"[Simplex Server] Connected by {addr}")
-            message = "This is a simplex message from the server."
+            message = input("[Simplex Server] Enter message to send: ")
             conn.sendall(message.encode('utf-8'))
             print("[Simplex Server] Message sent, closing connection.")
 
