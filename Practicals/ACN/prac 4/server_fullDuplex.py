@@ -21,7 +21,7 @@ def handle_client_send(conn):
         conn.sendall(message.encode('utf-8'))
 
 def run_full_duplex_server():
-    HOST = '127.0.0.1'
+    HOST = '192.168.137.72'
     PORT = 65434  # Different port for full-duplex
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server:
