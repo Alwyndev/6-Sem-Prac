@@ -8,7 +8,7 @@ s.bind(("192.168.137.72", 65434))
 
 # Listen for incoming connections
 s.listen(1)
-print("Server listening on port 123")
+print("Server listening on port 65434")
 
 # Accept client connection
 client_socket, client_address = s.accept()

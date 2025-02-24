@@ -1,8 +1,8 @@
 import socket
 
 def run_half_duplex_server():
-    HOST = '127.0.0.1'
-    PORT = 65433  # Different port for half-duplex
+    HOST = '127.0.0.1' #Default loopback address. Change it to your(server) address
+    PORT = 65433  # Random port for half-duplex (above 1024)
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.bind((HOST, PORT))
