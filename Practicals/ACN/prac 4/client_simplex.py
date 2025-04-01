@@ -1,7 +1,7 @@
 import socket
 
 def run_simplex_client():
-    HOST = '127.0.0.1' #simple loopback address change it to your server's ip address
+    HOST = '192.168.49.245' #simple loopback address change it to your server's ip address
     PORT = 65432 # Random port to run the client
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

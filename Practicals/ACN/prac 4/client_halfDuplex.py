@@ -1,7 +1,7 @@
 import socket
 
 def run_half_duplex_client():
-    HOST = '127.0.0.1' #Default loopback host address. Change it to your host/server address.
+    HOST = '192.168.49.245' #Default loopback host address. Change it to your host/server address.
     PORT = 65433 # Random port to run the client
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

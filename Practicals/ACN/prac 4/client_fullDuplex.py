@@ -21,7 +21,7 @@ def send_to_server(sock):
         sock.sendall(message.encode('utf-8'))
 
 def run_full_duplex_client():
-    HOST = '192.168.51.183'
+    HOST = '192.168.31.123'
     PORT = 65434
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

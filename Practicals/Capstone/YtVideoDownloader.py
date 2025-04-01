@@ -2,7 +2,7 @@ import yt_dlp
 
 
 def download(url):
-    ydl_opts = {'format': 'bestvideo[height <=1080]',
+    ydl_opts = {'format': 'bestvideo[height <=2160]',
                 'noplaylist': True,
     }
 
